@@ -18,18 +18,18 @@ namespace Nancy.Bootstrappers.Autofac.Tests
             builder.RegisterType<Dependency>().As<IDependency>().SingleInstance();
             builder.Update(container.ComponentRegistry);
 
-            RequestContainerConfigured = true;
+            this.RequestContainerConfigured = true;
         }
 
         protected override void ConfigureApplicationContainer(ILifetimeScope existingContainer)
         {
             base.ConfigureApplicationContainer(existingContainer);
-            ApplicationContainerConfigured = true;
+            this.ApplicationContainerConfigured = true;
         }
 
         public T Resolve<T>()
         {
-            return ApplicationContainer.Resolve<T>();
+            return this.ApplicationContainer.Resolve<T>();
         }
     }
 }
