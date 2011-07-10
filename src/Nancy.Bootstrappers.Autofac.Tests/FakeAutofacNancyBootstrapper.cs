@@ -1,10 +1,9 @@
-using System.Linq;
-using Autofac;
-using Nancy.Bootstrappers.Autofac;
-using Nancy.Tests.Fakes;
-
-namespace Nancy.BootStrappers.Autofac.Tests
+namespace Nancy.Bootstrappers.Autofac.Tests
 {
+    using Autofac;
+    using Nancy.Tests.Fakes;
+    using global::Autofac;
+
     public class FakeAutofacNancyBootstrapper : AutofacNancyBootstrapper
     {
         public bool RequestContainerConfigured { get; set; }

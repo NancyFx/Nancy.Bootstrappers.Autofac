@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Nancy.BootStrappers.Autofac.Tests
+﻿namespace Nancy.Bootstrappers.Autofac.Tests
 {
     using System.Linq;
     using Nancy.Tests;
+    using Nancy.Tests.Fakes;
     using Xunit;
     using Nancy.Routing;
     using Nancy.Bootstrapper;
-    using Nancy.Tests.Fakes;
 
     public class AutofacNancyBootstrapperFixture
     {
