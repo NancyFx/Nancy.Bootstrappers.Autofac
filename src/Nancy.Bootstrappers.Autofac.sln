@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nancy.Bootstrappers.Autofac
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nancy", "..\dependencies\Nancy\src\Nancy\Nancy.csproj", "{34576216-0DCA-4B0F-A0DC-9075E75A676F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nancy.BootStrappers.Autofac.Tests", "Nancy.BootStrappers.Autofac.Tests\Nancy.BootStrappers.Autofac.Tests.csproj", "{F7487A32-729C-4F50-A15C-68D2B57803EA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nancy.Bootstrappers.Autofac.Tests", "Nancy.BootStrappers.Autofac.Tests\Nancy.Bootstrappers.Autofac.Tests.csproj", "{F7487A32-729C-4F50-A15C-68D2B57803EA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nancy.Tests", "..\dependencies\Nancy\src\Nancy.Tests\Nancy.Tests.csproj", "{776D244D-BC4D-4BBB-A478-CAF2D04520E1}"
 EndProject

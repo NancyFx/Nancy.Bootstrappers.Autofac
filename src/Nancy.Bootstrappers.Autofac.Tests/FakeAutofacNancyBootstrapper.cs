@@ -1,10 +1,9 @@
-using System.Linq;
-using Autofac;
-using Nancy.Bootstrappers.Autofac;
-using Nancy.Tests.Fakes;
-
-namespace Nancy.BootStrappers.Autofac.Tests
+namespace Nancy.Bootstrappers.Autofac.Tests
 {
+    using Autofac;
+    using Nancy.Tests.Fakes;
+    using global::Autofac;
+
     public class FakeAutofacNancyBootstrapper : AutofacNancyBootstrapper
     {
         public bool RequestContainerConfigured { get; set; }
@@ -19,18 +18,18 @@ namespace Nancy.BootStrappers.Autofac.Tests
             builder.RegisterType<Dependency>().As<IDependency>().SingleInstance();
             builder.Update(container.ComponentRegistry);
 
-            RequestContainerConfigured = true;
+            this.RequestContainerConfigured = true;
         }
 
         protected override void ConfigureApplicationContainer(ILifetimeScope existingContainer)
         {
             base.ConfigureApplicationContainer(existingContainer);
-            ApplicationContainerConfigured = true;
+            this.ApplicationContainerConfigured = true;
         }
 
         public T Resolve<T>()
         {
-            return ApplicationContainer.Resolve<T>();
+            return this.ApplicationContainer.Resolve<T>();
         }
     }
 }

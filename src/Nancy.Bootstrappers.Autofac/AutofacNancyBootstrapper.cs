@@ -1,10 +1,9 @@
 ﻿using Autofac;
-using Nancy.Bootstrapper;
 
 namespace Nancy.Bootstrappers.Autofac
 {
-    using System;
     using System.Collections.Generic;
+    using Nancy.Bootstrapper;
 
     public class AutofacNancyBootstrapper : NancyBootstrapperWithRequestContainerBase<ILifetimeScope>
     {
@@ -14,7 +13,7 @@ namespace Nancy.Bootstrappers.Autofac
         /// <returns>An <see cref="System.Collections.Generic.IEnumerable{T}"/> instance containing <see cref="IStartup"/> instances. </returns>
         protected override IEnumerable<IStartup> GetStartupTasks()
         {
-            return ApplicationContainer.Resolve<IEnumerable<IStartup>>();
+            return this.ApplicationContainer.Resolve<IEnumerable<IStartup>>();
         }
 
         /// <summary>
@@ -23,7 +22,7 @@ namespace Nancy.Bootstrappers.Autofac
         /// <returns>INancyEngine implementation</returns>
         protected override INancyEngine GetEngineInternal()
         {
-            return ApplicationContainer.Resolve<INancyEngine>();
+            return this.ApplicationContainer.Resolve<INancyEngine>();
         }
 
         /// <summary>
@@ -32,7 +31,7 @@ namespace Nancy.Bootstrappers.Autofac
         /// <returns>IModuleKeyGenerator instance</returns>
         protected override IModuleKeyGenerator GetModuleKeyGenerator()
         {
-            return ApplicationContainer.Resolve<IModuleKeyGenerator>();
+            return this.ApplicationContainer.Resolve<IModuleKeyGenerator>();
         }
 
         /// <summary>
@@ -82,9 +81,9 @@ namespace Nancy.Bootstrappers.Autofac
         protected override void RegisterCollectionTypes(ILifetimeScope container, IEnumerable<CollectionTypeRegistration> collectionTypeRegistrations)
         {
             var builder = new ContainerBuilder();
-            foreach (CollectionTypeRegistration collectionTypeRegistration in collectionTypeRegistrations)
+            foreach (var collectionTypeRegistration in collectionTypeRegistrations)
             {
-                foreach (Type implementationType in collectionTypeRegistration.ImplementationTypes)
+                foreach (var implementationType in collectionTypeRegistration.ImplementationTypes)
                 {
                     builder.RegisterType(implementationType).As(collectionTypeRegistration.RegistrationType).SingleInstance();
                 }
@@ -100,7 +99,7 @@ namespace Nancy.Bootstrappers.Autofac
         protected override void RegisterInstances(ILifetimeScope container, IEnumerable<InstanceRegistration> instanceRegistrations)
         {
             var builder = new ContainerBuilder();
-            foreach (InstanceRegistration instanceRegistration in instanceRegistrations)
+            foreach (var instanceRegistration in instanceRegistrations)
             {
                 builder.RegisterInstance(instanceRegistration.Implementation).As(instanceRegistration.RegistrationType);
             }
@@ -124,7 +123,7 @@ namespace Nancy.Bootstrappers.Autofac
         protected override void RegisterRequestContainerModules(ILifetimeScope container, IEnumerable<ModuleRegistration> moduleRegistrationTypes)
         {
             var builder = new ContainerBuilder();
-            foreach (ModuleRegistration moduleRegistrationType in moduleRegistrationTypes)
+            foreach (var moduleRegistrationType in moduleRegistrationTypes)
             {
                 builder.RegisterType(moduleRegistrationType.ModuleType).As(typeof(NancyModule)).Named<NancyModule>(moduleRegistrationType.ModuleKey);
             }
@@ -138,10 +137,6 @@ namespace Nancy.Bootstrappers.Autofac
         /// <returns>Collection of NancyModule instances</returns>
         protected override IEnumerable<NancyModule> GetAllModules(ILifetimeScope container)
         {
-            //using (var child = ApplicationContainer.BeginLifetimeScope())
-            //{
-            //    return child.Resolve<IEnumerable<NancyModule>>();
-            //}
             return container.Resolve<IEnumerable<NancyModule>>();
         }
 
