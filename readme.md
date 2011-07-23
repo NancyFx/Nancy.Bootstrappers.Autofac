@@ -1,6 +1,7 @@
 ## Contributors
 
 * [Andreas Håkansson](http://github.com/thecodejunkie)
+* [Andy Pike](http://github.com/andypike)
 * [Nathan Palmer](http://github.com/nathanpalmer)
 * [Steven Robbins](http://github.com/grumpydev)
 
