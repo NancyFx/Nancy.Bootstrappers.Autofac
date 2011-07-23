@@ -7,7 +7,7 @@ NANCY_VERSION = "0.6.0"
 OUTPUT = "build"
 CONFIGURATION = 'Release'
 SHARED_ASSEMBLY_INFO = 'src/SharedAssemblyInfo.cs'
-SOLUTION_FILE = 'src/Nancy.sln'
+SOLUTION_FILE = 'src/Nancy.Bootstrappers.Autofac.sln'
 
 Albacore.configure do |config|
     config.log_level = :verbose
@@ -16,10 +16,7 @@ Albacore.configure do |config|
 end
 
 desc "Compiles solution and runs unit tests"
-task :default => [:clean, :version, :compile, :test, :publish, :package]
-
-desc "Executes all MSpec and Xunit tests"
-task :test => [:mspec, :xunit]
+task :default => [:clean, :version, :compile, :xunit, :publish, :package]
 
 #Add the folders that should be cleaned as part of the clean task
 CLEAN.include(OUTPUT)
@@ -51,19 +48,9 @@ task :publish => [:compile] do
     FileUtils.cp_r FileList["src/**/#{CONFIGURATION}/*.dll", "src/**/#{CONFIGURATION}/*.pdb"].exclude(/obj\//).exclude(/.Tests/), "#{OUTPUT}/binaries"
 end
 
-desc "Executes MSpec tests"
-mspec :mspec => [:compile] do |mspec|
-    #This is a bit fragile but this is the only mspec assembly at present. 
-    #Fails if passed a FileList of all tests. Need to investigate.
-    mspec.command = "tools/mspec/mspec.exe"
-    mspec.assemblies "src/Nancy.Tests/bin/Release/Nancy.Tests.dll"
-end
-
 desc "Executes xUnit tests"
 xunit :xunit => [:compile] do |xunit|
-    tests = FileList["src/**/#{CONFIGURATION}/*.Tests.dll"].exclude(/obj\//)
-
-    xunit.command = "tools/xunit/xunit.console.clr4.x86.exe"
+    tests = FileList["src/**/#{CONFIGURATION}/Nancy.Bootstrappers.Autofac.Tests.dll"].exclude(/obj\//)
     xunit.assemblies = tests
 end 
 
@@ -72,19 +59,19 @@ zip :package => [:publish] do |zip|
     Dir.mkdir("#{OUTPUT}/packages")
 
     zip.directories_to_zip "#{OUTPUT}/binaries"
-    zip.output_file = "NancyFx-Latest.zip"
+    zip.output_file = "Nancy.Bootstrappers.Autofac-Latest.zip"
     zip.output_path = "#{OUTPUT}/packages"
 end
 
 desc "Generates NuGet packages for each project that contains a nuspec"
 task :nuget_package => [:publish] do
     Dir.mkdir("#{OUTPUT}/nuget")
-    nuspecs = FileList["src/**/*.nuspec"]
+    nuspecs = FileList["src/nancy.bootstrappers.autofac/*.nuspec"]
     root = File.dirname(__FILE__)
 
     # Copy all project *.nuspec to nuget build folder before editing
     FileUtils.cp_r nuspecs, "#{OUTPUT}/nuget"
-    nuspecs = FileList["#{OUTPUT}/nuget/*.nuspec"]
+    nuspecs = FileList["#{OUTPUT}/nuget/nancy.bootstrappers.autofac.nuspec"]
 
     # Update the copied *.nuspec files to correct version numbers and other common values
     nuspecs.each do |nuspec|
@@ -99,7 +86,7 @@ task :nuget_package => [:publish] do
             # Override common values
             xml.root.elements["metadata/authors"].text = "Andreas Håkansson, Steven Robbins and contributors"
             xml.root.elements["metadata/summary"].text = "Nancy is a lightweight web framework for the .Net platform, inspired by Sinatra. Nancy aim at delivering a low ceremony approach to building light, fast web applications."
-            xml.root.elements["metadata/licenseUrl"].text = "https://github.com/thecodejunkie/Nancy/blob/master/license.txt"
+            xml.root.elements["metadata/licenseUrl"].text = "https://github.com/NancyFx/Nancy.Bootstrappers.Autofac/blob/master/license.txt"
             xml.root.elements["metadata/projectUrl"].text = "http://nancyfx.org"
         end
     end
@@ -107,7 +94,7 @@ task :nuget_package => [:publish] do
     # Generate the NuGet packages from the newly edited nuspec fileiles
     nuspecs.each do |nuspec|        
         nuget = NuGetPack.new
-        nuget.command = "tools/nuget/nuget.exe"
+        nuget.command = "dependencies/Nancy/tools/nuget/nuget.exe"
         nuget.nuspec = "\"" + root + '/' + nuspec + "\""
         nuget.output = "#{OUTPUT}/nuget"
         nuget.parameters = "-Symbols", "-BasePath \"#{root}\""     #using base_folder throws as there are two options that begin with b in nuget 1.4
@@ -121,7 +108,7 @@ task :nuget_publish do
     nupkgs.each do |nupkg| 
         puts "Pushing #{nupkg}"
         nuget_push = NuGetPush.new
-        nuget_push.command = "tools/nuget/nuget.exe"
+        nuget_push.command = "dependencies/Nancy/tools/nuget/nuget.exe"
         nuget_push.package = "\"" + nupkg + "\""
         nuget_push.create_only = false
         nuget_push.execute
