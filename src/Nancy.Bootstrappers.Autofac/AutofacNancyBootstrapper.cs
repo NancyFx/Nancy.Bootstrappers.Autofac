@@ -5,7 +5,7 @@ namespace Nancy.Bootstrappers.Autofac
     using System.Collections.Generic;
     using Nancy.Bootstrapper;
 
-    public class AutofacNancyBootstrapper : NancyBootstrapperWithRequestContainerBase<ILifetimeScope>
+    public abstract class AutofacNancyBootstrapper : NancyBootstrapperWithRequestContainerBase<ILifetimeScope>
     {
         /// <summary>
         /// Gets all registered startup tasks
