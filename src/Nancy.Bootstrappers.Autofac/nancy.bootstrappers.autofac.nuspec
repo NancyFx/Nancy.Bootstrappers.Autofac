@@ -11,7 +11,7 @@
     <licenseUrl>https://github.com/thecodejunkie/Nancy/blob/master/license.txt</licenseUrl>
     <projectUrl>http://nancyfx.org</projectUrl>
 	<dependencies>
-      <dependency id="Nancy" version="[0.6.0]" />
+      <dependency id="Nancy" />
 	  <dependency id="Autofac" />
     </dependencies> 
     <tags>Nancy Autofac</tags>
