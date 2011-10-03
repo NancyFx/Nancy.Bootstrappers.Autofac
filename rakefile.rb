@@ -4,7 +4,7 @@ require 'albacore'
 require 'rake/clean'
 require 'rexml/document'
 
-NANCY_VERSION = "0.7.1"
+NANCY_VERSION = "0.8.0"
 OUTPUT = "build"
 CONFIGURATION = 'Release'
 SHARED_ASSEMBLY_INFO = 'src/SharedAssemblyInfo.cs'
