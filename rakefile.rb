@@ -4,10 +4,10 @@ require 'albacore'
 require 'rake/clean'
 require 'rexml/document'
 
-NANCY_VERSION = "0.8.1"
+NANCY_VERSION = ""
 OUTPUT = "build"
 CONFIGURATION = 'Release'
-SHARED_ASSEMBLY_INFO = 'src/SharedAssemblyInfo.cs'
+SHARED_ASSEMBLY_INFO = 'dependencies/Nancy/src/SharedAssemblyInfo.cs'
 SOLUTION_FILE = 'src/Nancy.Bootstrappers.Autofac.sln'
 
 Albacore.configure do |config|
@@ -25,13 +25,15 @@ CLEAN.include(FileList["src/**/#{CONFIGURATION}"])
 
 desc "Update shared assemblyinfo file for the build"
 assemblyinfo :version => [:clean] do |asm|
-    asm.version = NANCY_VERSION
+  NANCY_VERSION = get_assembly_version SHARED_ASSEMBLY_INFO
+
+  asm.version = NANCY_VERSION
 	asm.company_name = "Nancy"
 	asm.product_name = "Nancy.Bootstrappers.Autofac"
 	asm.title = "Nancy.Bootstrappers.Autofac"
 	asm.description = "An Autofac Bootstrapper for the Nancy web framework"
 	asm.copyright = "Copyright (C) Andreas Hakansson, Steven Robbins and contributors"
-    asm.output_file = SHARED_ASSEMBLY_INFO
+  asm.output_file = SHARED_ASSEMBLY_INFO
 end
 
 desc "Compile solution file"
@@ -104,11 +106,12 @@ task :nuget_package => [:publish] do
 end
 
 desc "Pushes the nuget packages in the nuget folder up to the nuget gallary and symbolsource.org. Also publishes the packages into the feeds."
-task :nuget_publish do
+task :nuget_publish, :api_key do |task, args|
     nupkgs = FileList["#{OUTPUT}/nuget/*#{NANCY_VERSION}.nupkg"]
     nupkgs.each do |nupkg| 
         puts "Pushing #{nupkg}"
         nuget_push = NuGetPush.new
+        nuget_push.apikey = args.api_key if !args.empty?
         nuget_push.command = "dependencies/Nancy/tools/nuget/nuget.exe"
         nuget_push.package = "\"" + nupkg + "\""
         nuget_push.create_only = false
@@ -131,4 +134,18 @@ def update_xml(xml_path)
     formatter = REXML::Formatters::Default.new(5)
     formatter.write(xml, xml_file)
     xml_file.close 
+end
+
+def get_assembly_version(file)
+  return '' if file.nil?
+
+  File.open(file, 'r') do |file|
+    file.each_line do |line|
+      result = /\[assembly: AssemblyVersion\(\"(.*?)\"\)\]/.match(line)
+
+      return result[1] if !result.nil?
+    end
+  end
+
+  ''
 end
