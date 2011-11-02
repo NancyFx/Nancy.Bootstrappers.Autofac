@@ -7,6 +7,7 @@
 *.orig
 *.pidb
 *.userprefs
+*.tss
 AssemblyInfo.cs
 .DS_Store
 deploy/
