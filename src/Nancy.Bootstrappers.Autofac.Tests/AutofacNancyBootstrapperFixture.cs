@@ -7,6 +7,9 @@
     using Nancy.Routing;
     using Nancy.Bootstrapper;
 
+    /// <summary>
+    /// Nancy bootstrapper for the Autofac container.
+    /// </summary>
     public class AutofacNancyBootstrapperFixture
     {
         private readonly FakeAutofacNancyBootstrapper bootstrapper;
