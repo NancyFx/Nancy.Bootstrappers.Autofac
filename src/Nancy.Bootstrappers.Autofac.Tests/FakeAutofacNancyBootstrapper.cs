@@ -9,9 +9,9 @@ namespace Nancy.Bootstrappers.Autofac.Tests
         public bool RequestContainerConfigured { get; set; }
         public bool ApplicationContainerConfigured { get; set; }
 
-        protected override void ConfigureRequestContainer(ILifetimeScope container)
+        protected override void ConfigureRequestContainer(ILifetimeScope container, NancyContext context)
         {
-            base.ConfigureRequestContainer(container);
+            base.ConfigureRequestContainer(container, context);
 
             var builder = new ContainerBuilder();
             builder.RegisterType<Foo>().As<IFoo>().SingleInstance();
