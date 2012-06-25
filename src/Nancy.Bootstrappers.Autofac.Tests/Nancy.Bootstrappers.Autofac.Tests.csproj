@@ -51,17 +51,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\dependencies\Nancy\src\Nancy.Tests\Fakes\FakeNancyModuleWithBasePath.cs">
+      <Link>FakeNancyModuleWithBasePath.cs</Link>
+    </Compile>
+    <Compile Include="..\..\dependencies\Nancy\src\Nancy.Tests\Fakes\FakeNancyModuleWithDependency.cs">
+      <Link>FakeNancyModuleWithDependency.cs</Link>
+    </Compile>
+    <Compile Include="..\..\dependencies\Nancy\src\Nancy.Tests\ShouldExtensions.cs">
+      <Link>ShouldExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\dependencies\Nancy\src\Nancy.Tests\Unit\Bootstrapper\Base\BootstrapperBaseFixtureBase.cs">
+      <Link>BootstrapperBaseFixtureBase.cs</Link>
+    </Compile>
     <Compile Include="..\..\dependencies\Nancy\src\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AutofacNancyBootstrapperFixture.cs" />
+    <Compile Include="AutofacBootstrapperBaseFixture.cs" />
     <Compile Include="FakeAutofacNancyBootstrapper.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\dependencies\Nancy\src\Nancy.Tests\Nancy.Tests.csproj">
-      <Project>{776D244D-BC4D-4BBB-A478-CAF2D04520E1}</Project>
-      <Name>Nancy.Tests</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Nancy.Bootstrappers.Autofac\Nancy.Bootstrappers.Autofac.csproj">
       <Project>{0057E8A4-A349-4C09-98BF-DED6320919FA}</Project>
       <Name>Nancy.Bootstrappers.Autofac</Name>

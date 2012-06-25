@@ -1,6 +1,7 @@
 namespace Nancy.Bootstrappers.Autofac.Tests
 {
     using Autofac;
+    using Bootstrapper;
     using Nancy.Tests.Fakes;
     using global::Autofac;
 
@@ -8,6 +9,21 @@ namespace Nancy.Bootstrappers.Autofac.Tests
     {
         public bool RequestContainerConfigured { get; set; }
         public bool ApplicationContainerConfigured { get; set; }
+        private readonly NancyInternalConfiguration configuration;
+
+        public FakeAutofacNancyBootstrapper()
+        {
+        }
+
+        public FakeAutofacNancyBootstrapper(NancyInternalConfiguration configuration)
+        {
+            this.configuration = configuration;
+        }
+
+        protected override NancyInternalConfiguration InternalConfiguration
+        {
+            get { return configuration ?? base.InternalConfiguration; }
+        }
 
         protected override void ConfigureRequestContainer(ILifetimeScope container, NancyContext context)
         {
