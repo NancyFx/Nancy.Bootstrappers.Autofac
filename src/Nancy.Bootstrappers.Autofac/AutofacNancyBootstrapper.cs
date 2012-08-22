@@ -3,10 +3,16 @@
 namespace Nancy.Bootstrappers.Autofac
 {
     using System.Collections.Generic;
+    using Diagnostics;
     using Nancy.Bootstrapper;
 
     public abstract class AutofacNancyBootstrapper : NancyBootstrapperWithRequestContainerBase<ILifetimeScope>
     {
+        protected override IDiagnostics GetDiagnostics()
+        {
+            return this.ApplicationContainer.Resolve<IDiagnostics>();
+        }
+
         /// <summary>
         /// Gets all registered application startup tasks
         /// </summary>
