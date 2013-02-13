@@ -140,7 +140,7 @@ namespace Nancy.Bootstrappers.Autofac
             var builder = new ContainerBuilder();
             foreach (var moduleRegistrationType in moduleRegistrationTypes)
             {
-                builder.RegisterType(moduleRegistrationType.ModuleType).As(typeof(NancyModule)).Named<NancyModule>(moduleRegistrationType.ModuleKey);
+                builder.RegisterType(moduleRegistrationType.ModuleType).As(typeof(INancyModule)).Named<INancyModule>(moduleRegistrationType.ModuleKey);
             }
             builder.Update(container.ComponentRegistry);
         }
@@ -150,9 +150,9 @@ namespace Nancy.Bootstrappers.Autofac
         /// </summary>
         /// <param name="container">Container to use</param>
         /// <returns>Collection of NancyModule instances</returns>
-        protected override IEnumerable<NancyModule> GetAllModules(ILifetimeScope container)
+        protected override IEnumerable<INancyModule> GetAllModules(ILifetimeScope container)
         {
-            return container.Resolve<IEnumerable<NancyModule>>();
+            return container.Resolve<IEnumerable<INancyModule>>();
         }
 
         /// <summary>
@@ -161,9 +161,9 @@ namespace Nancy.Bootstrappers.Autofac
         /// <param name="container">Container to use</param>
         /// <param name="moduleKey">Module key of the module</param>
         /// <returns>NancyModule instance</returns>
-        protected override NancyModule GetModuleByKey(ILifetimeScope container, string moduleKey)
+        protected override INancyModule GetModuleByKey(ILifetimeScope container, string moduleKey)
         {
-            return container.ResolveNamed(moduleKey, typeof(NancyModule)) as NancyModule;
+            return container.ResolveNamed(moduleKey, typeof(INancyModule)) as INancyModule;
         }
     }
 }
