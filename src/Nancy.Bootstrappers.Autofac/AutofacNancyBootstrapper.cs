@@ -2,6 +2,7 @@
 
 namespace Nancy.Bootstrappers.Autofac
 {
+    using System;
     using System.Collections.Generic;
     using Diagnostics;
     using Nancy.Bootstrapper;
@@ -38,15 +39,6 @@ namespace Nancy.Bootstrappers.Autofac
         protected override INancyEngine GetEngineInternal()
         {
             return this.ApplicationContainer.Resolve<INancyEngine>();
-        }
-
-        /// <summary>
-        /// Get the moduleKey generator
-        /// </summary>
-        /// <returns>IModuleKeyGenerator instance</returns>
-        protected override IModuleKeyGenerator GetModuleKeyGenerator()
-        {
-            return this.ApplicationContainer.Resolve<IModuleKeyGenerator>();
         }
 
         /// <summary>
@@ -134,14 +126,17 @@ namespace Nancy.Bootstrappers.Autofac
         /// Bind the given module types into the container
         /// </summary>
         /// <param name="container">Container to register into</param>
-        /// <param name="moduleRegistrationTypes">NancyModule types</param>
+        /// <param name="moduleRegistrationTypes"><see cref="INancyModule"/> types</param>
         protected override void RegisterRequestContainerModules(ILifetimeScope container, IEnumerable<ModuleRegistration> moduleRegistrationTypes)
         {
-            var builder = new ContainerBuilder();
+            var builder = 
+                new ContainerBuilder();
+
             foreach (var moduleRegistrationType in moduleRegistrationTypes)
             {
-                builder.RegisterType(moduleRegistrationType.ModuleType).As(typeof(INancyModule)).Named<INancyModule>(moduleRegistrationType.ModuleKey);
+                builder.RegisterType(moduleRegistrationType.ModuleType).As<INancyModule>();
             }
+
             builder.Update(container.ComponentRegistry);
         }
 
@@ -149,21 +144,27 @@ namespace Nancy.Bootstrappers.Autofac
         /// Retrieve all module instances from the container
         /// </summary>
         /// <param name="container">Container to use</param>
-        /// <returns>Collection of NancyModule instances</returns>
+        /// <returns>Collection of <see cref="INancyModule"/> instances</returns>
         protected override IEnumerable<INancyModule> GetAllModules(ILifetimeScope container)
         {
             return container.Resolve<IEnumerable<INancyModule>>();
         }
 
         /// <summary>
-        /// Retreive a specific module instance from the container by its key
+        /// Retreive a specific module instance from the container
         /// </summary>
         /// <param name="container">Container to use</param>
-        /// <param name="moduleKey">Module key of the module</param>
-        /// <returns>NancyModule instance</returns>
-        protected override INancyModule GetModuleByKey(ILifetimeScope container, string moduleKey)
+        /// <param name="moduleType">Type of the module</param>
+        /// <returns>An <see cref="INancyModule"/> instance</returns>
+        protected override INancyModule GetModule(ILifetimeScope container, Type moduleType)
         {
-            return container.ResolveNamed(moduleKey, typeof(INancyModule)) as INancyModule;
+            var builder = 
+                new ContainerBuilder();
+
+            builder.RegisterType(moduleType).As<INancyModule>();
+            builder.Update(container.ComponentRegistry);
+
+            return container.Resolve<INancyModule>();
         }
     }
 }
