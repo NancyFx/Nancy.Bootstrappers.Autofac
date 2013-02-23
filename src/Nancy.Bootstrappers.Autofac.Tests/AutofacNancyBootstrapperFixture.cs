@@ -50,23 +50,6 @@
         }
 
         [Fact]
-        public void GetModule_Returns_As_MultiInstance()
-        {
-            // Given
-            this.bootstrapper.GetEngine();
-            var context = new NancyContext();
-
-            // When
-            var output1 = this.bootstrapper.GetModule(typeof(FakeNancyModuleWithBasePath), context);
-            var output2 = this.bootstrapper.GetModule(typeof(FakeNancyModuleWithBasePath), context);
-
-            // Then
-            output1.ShouldNotBeNull();
-            output2.ShouldNotBeNull();
-            output1.ShouldNotBeSameAs(output2);
-        }
-
-        [Fact]
         public void GetAllModules_Configures_Child_Container()
         {
             // Given
@@ -106,21 +89,6 @@
         }
 
         [Fact]
-        public void GetEngine_Defaults_Registered_In_Container()
-        {
-            // Given
-            // When
-            this.bootstrapper.GetEngine();
-
-            // Then
-            this.bootstrapper.Resolve<INancyModuleCatalog>().ShouldNotBeNull();
-            this.bootstrapper.Resolve<IRouteResolver>().ShouldNotBeNull();
-            this.bootstrapper.Resolve<INancyEngine>().ShouldNotBeNull();
-            this.bootstrapper.Resolve<IRouteCache>().ShouldNotBeNull();
-            this.bootstrapper.Resolve<IRouteCacheProvider>().ShouldNotBeNull();
-        }
-
-        [Fact]
         public void Get_Module_Gives_Same_Request_Lifetime_Instance_To_Each_Dependency()
         {
             // Given
@@ -132,23 +100,6 @@
             // Then
             result.FooDependency.ShouldNotBeNull();
             result.FooDependency.ShouldBeSameAs(result.Dependency.FooDependency);
-        }
-
-        [Fact]
-        public void Should_return_the_same_instance_when_getmodule_is_called_multiple_times_with_the_same_context()
-        {
-            // Given
-            this.bootstrapper.GetEngine();
-            var context = new NancyContext();
-
-            // When
-            var result = this.bootstrapper.GetModule(typeof(FakeNancyModuleWithDependency), context) as FakeNancyModuleWithDependency;
-            var result2 = this.bootstrapper.GetModule(typeof(FakeNancyModuleWithDependency), context) as FakeNancyModuleWithDependency;
-
-            // Then
-            result.FooDependency.ShouldNotBeNull();
-            result2.FooDependency.ShouldNotBeNull();
-            result.FooDependency.ShouldBeSameAs(result2.FooDependency);
         }
 
         [Fact]
