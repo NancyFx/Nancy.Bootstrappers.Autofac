@@ -21,7 +21,7 @@ public class Bootstrapper : AutofacNancyBootstrapper
 
     protected override void ConfigureApplicationContainer(ILifetimeScope existingContainer)
     {
-        // Perform registation that should have an application lifetime
+        // Perform registration that should have an application lifetime
     }
 
     protected override void ConfigureRequestContainer(ILifetimeScope container, NancyContext context)
