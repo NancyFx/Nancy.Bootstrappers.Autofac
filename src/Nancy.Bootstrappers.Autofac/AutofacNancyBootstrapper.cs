@@ -92,7 +92,7 @@ namespace Nancy.Bootstrappers.Autofac
             {
                 foreach (var implementationType in collectionTypeRegistration.ImplementationTypes)
                 {
-                    builder.RegisterType(implementationType).As(collectionTypeRegistration.RegistrationType).SingleInstance();
+                    builder.RegisterType(implementationType).As(collectionTypeRegistration.RegistrationType).PreserveExistingDefaults().SingleInstance();
                 }
             }
             builder.Update(container.ComponentRegistry);
