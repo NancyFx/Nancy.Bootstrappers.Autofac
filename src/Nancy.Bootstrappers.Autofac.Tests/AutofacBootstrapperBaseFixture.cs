@@ -7,16 +7,16 @@ namespace Nancy.Bootstrappers.Autofac.Tests
 
     public class AutofacBootstrapperBaseFixture : BootstrapperBaseFixtureBase<ILifetimeScope>
     {
-        private readonly AutofacNancyBootstrapper boostrapper;
+        private readonly AutofacNancyBootstrapper bootstrapper;
 
         public AutofacBootstrapperBaseFixture()
         {
-            this.boostrapper = new FakeAutofacNancyBootstrapper(this.Configuration);
+            this.bootstrapper = new FakeAutofacNancyBootstrapper(this.Configuration);
         }
 
         protected override NancyBootstrapperBase<ILifetimeScope> Bootstrapper
         {
-            get { return this.boostrapper; }
+            get { return this.bootstrapper; }
         }
     }
 }
