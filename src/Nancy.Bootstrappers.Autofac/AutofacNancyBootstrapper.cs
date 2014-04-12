@@ -72,10 +72,24 @@ namespace Nancy.Bootstrappers.Autofac
         protected override void RegisterTypes(ILifetimeScope container, IEnumerable<TypeRegistration> typeRegistrations)
         {
             var builder = new ContainerBuilder();
-            foreach(var typeRegistration in typeRegistrations)
+
+            foreach (var typeRegistration in typeRegistrations)
             {
-                builder.RegisterType(typeRegistration.ImplementationType).As(typeRegistration.RegistrationType).SingleInstance();
+                switch (typeRegistration.Lifetime)
+                {
+                    case Lifetime.Transient:
+                        builder.RegisterType(typeRegistration.ImplementationType).As(typeRegistration.RegistrationType).InstancePerDependency();
+                        break;
+                    case Lifetime.Singleton:
+                        builder.RegisterType(typeRegistration.ImplementationType).As(typeRegistration.RegistrationType).SingleInstance();
+                        break;
+                    case Lifetime.PerRequest:
+                        throw new InvalidOperationException("Unable to directly register a per request lifetime.");
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
             }
+
             builder.Update(ApplicationContainer.ComponentRegistry);
         }
 
@@ -88,13 +102,27 @@ namespace Nancy.Bootstrappers.Autofac
         protected override void RegisterCollectionTypes(ILifetimeScope container, IEnumerable<CollectionTypeRegistration> collectionTypeRegistrations)
         {
             var builder = new ContainerBuilder();
+
             foreach (var collectionTypeRegistration in collectionTypeRegistrations)
             {
                 foreach (var implementationType in collectionTypeRegistration.ImplementationTypes)
                 {
-                    builder.RegisterType(implementationType).As(collectionTypeRegistration.RegistrationType).PreserveExistingDefaults().SingleInstance();
+                    switch (collectionTypeRegistration.Lifetime)
+                    {
+                        case Lifetime.Transient:
+                            builder.RegisterType(implementationType).As(collectionTypeRegistration.RegistrationType).PreserveExistingDefaults().InstancePerDependency();
+                            break;
+                        case Lifetime.Singleton:
+                            builder.RegisterType(implementationType).As(collectionTypeRegistration.RegistrationType).PreserveExistingDefaults().SingleInstance();
+                            break;
+                        case Lifetime.PerRequest:
+                            throw new InvalidOperationException("Unable to directly register a per request lifetime.");
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
                 }
             }
+
             builder.Update(container.ComponentRegistry);
         }
 
@@ -129,7 +157,7 @@ namespace Nancy.Bootstrappers.Autofac
         /// <param name="moduleRegistrationTypes"><see cref="INancyModule"/> types</param>
         protected override void RegisterRequestContainerModules(ILifetimeScope container, IEnumerable<ModuleRegistration> moduleRegistrationTypes)
         {
-            var builder = 
+            var builder =
                 new ContainerBuilder();
 
             foreach (var moduleRegistrationType in moduleRegistrationTypes)
@@ -158,7 +186,7 @@ namespace Nancy.Bootstrappers.Autofac
         /// <returns>An <see cref="INancyModule"/> instance</returns>
         protected override INancyModule GetModule(ILifetimeScope container, Type moduleType)
         {
-            var builder = 
+            var builder =
                 new ContainerBuilder();
 
             builder.RegisterType(moduleType).As<INancyModule>();
