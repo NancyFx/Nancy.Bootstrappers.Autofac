@@ -3,6 +3,7 @@
 namespace Nancy.Bootstrappers.Autofac
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using Diagnostics;
     using Nancy.Bootstrapper;
@@ -21,6 +22,21 @@ namespace Nancy.Bootstrappers.Autofac
         protected override IEnumerable<IApplicationStartup> GetApplicationStartupTasks()
         {
             return this.ApplicationContainer.Resolve<IEnumerable<IApplicationStartup>>();
+        }
+
+        /// <summary>
+        /// Gets all registered request startup tasks
+        /// </summary>
+        /// <returns>An <see cref="IEnumerable{T}"/> instance containing <see cref="IRequestStartup"/> instances.</returns>
+        protected override IEnumerable<IRequestStartup> RegisterAndGetRequestStartupTasks(ILifetimeScope container, Type[] requestStartupTypes)
+        {
+            var builder = new ContainerBuilder();
+
+            builder.RegisterInstance(requestStartupTypes).As(typeof(IEnumerable<IRequestStartup>)).PreserveExistingDefaults().InstancePerDependency();
+
+            builder.Update(ApplicationContainer.ComponentRegistry);
+
+            return container.Resolve<IEnumerable<IRequestStartup>>();
         }
 
         /// <summary>
