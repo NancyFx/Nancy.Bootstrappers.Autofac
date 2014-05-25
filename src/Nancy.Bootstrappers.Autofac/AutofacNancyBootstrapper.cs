@@ -32,7 +32,10 @@ namespace Nancy.Bootstrappers.Autofac
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterInstance(requestStartupTypes).As(typeof(IEnumerable<IRequestStartup>)).PreserveExistingDefaults().InstancePerDependency();
+            foreach (var requestStartupType in requestStartupTypes)
+            {
+                builder.RegisterType(requestStartupType).As<IRequestStartup>().PreserveExistingDefaults().InstancePerDependency();
+            }
 
             builder.Update(ApplicationContainer.ComponentRegistry);
 
