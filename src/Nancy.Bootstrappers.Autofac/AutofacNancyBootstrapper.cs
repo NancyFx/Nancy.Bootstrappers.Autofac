@@ -163,8 +163,9 @@ namespace Nancy.Bootstrappers.Autofac
         /// <summary>
         /// Creates a per request child/nested container
         /// </summary>
+        /// <param name="context">Current context</param>
         /// <returns>Request container instance</returns>
-        protected override ILifetimeScope CreateRequestContainer()
+        protected override ILifetimeScope CreateRequestContainer(NancyContext context)
         {
             return ApplicationContainer.BeginLifetimeScope();
         }
