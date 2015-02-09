@@ -14,8 +14,8 @@
     <projectUrl>http://nancyfx.org</projectUrl>
     <dependencies>
       <dependency id="Nancy" />
-      <dependency id="Autofac" version="3.3.1" />
-    </dependencies> 
+      <dependency id="Autofac" version="3.5.2" />
+    </dependencies>
     <tags>Nancy Autofac</tags>
   </metadata>
   <files>
