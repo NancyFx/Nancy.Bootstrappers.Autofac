@@ -47,6 +47,7 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AutofacNancyBootstrapper.cs" />
+    <Compile Include="ComponentContextExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\dependencies\Nancy\src\Nancy\Nancy.csproj">
