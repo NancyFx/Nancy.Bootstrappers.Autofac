@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using Autofac.Core.Lifetime;
 
 namespace Nancy.Bootstrappers.Autofac
 {
@@ -167,7 +168,7 @@ namespace Nancy.Bootstrappers.Autofac
         /// <returns>Request container instance</returns>
         protected override ILifetimeScope CreateRequestContainer(NancyContext context)
         {
-            return ApplicationContainer.BeginLifetimeScope();
+            return ApplicationContainer.BeginLifetimeScope(MatchingScopeLifetimeTags.RequestLifetimeScopeTag);
         }
 
         /// <summary>
