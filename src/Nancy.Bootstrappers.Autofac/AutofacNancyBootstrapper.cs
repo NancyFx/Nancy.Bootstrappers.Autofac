@@ -4,10 +4,9 @@ using Autofac.Core.Lifetime;
 namespace Nancy.Bootstrappers.Autofac
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using Diagnostics;
-    using Nancy.Bootstrapper;
+    using Bootstrapper;
 
     public abstract class AutofacNancyBootstrapper : NancyBootstrapperWithRequestContainerBase<ILifetimeScope>
     {
@@ -66,8 +65,7 @@ namespace Nancy.Bootstrappers.Autofac
         /// <returns>Container instance</returns>
         protected override ILifetimeScope GetApplicationContainer()
         {
-            var builder = new ContainerBuilder();
-            return builder.Build();
+            return new ContainerBuilder().Build();
         }
 
         /// <summary>
