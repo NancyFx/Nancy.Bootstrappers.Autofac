@@ -1,8 +1,9 @@
-﻿using System;
-using Autofac;
+﻿using Autofac;
 
 namespace Nancy.Bootstrappers.Autofac
 {
+    using System;
+
     public static class ComponentContextExtensions
     {
         /// <summary>
