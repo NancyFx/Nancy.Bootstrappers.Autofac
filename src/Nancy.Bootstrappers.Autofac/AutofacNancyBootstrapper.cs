@@ -1,10 +1,10 @@
-﻿using Autofac;
-using Autofac.Core.Lifetime;
-
 namespace Nancy.Bootstrappers.Autofac
 {
     using System;
     using System.Collections.Generic;
+    using Autofac;
+    using Autofac.Core.Lifetime;
+    using Configuration;
     using Diagnostics;
     using Bootstrapper;
 
@@ -57,6 +57,25 @@ namespace Nancy.Bootstrappers.Autofac
         protected override INancyEngine GetEngineInternal()
         {
             return this.ApplicationContainer.Resolve<INancyEngine>();
+        }
+
+        /// <summary>
+        /// Gets the <see cref="INancyEnvironmentConfigurator"/> used by th.
+        /// </summary>
+        /// <returns>An <see cref="INancyEnvironmentConfigurator"/> instance.</returns>
+        protected override INancyEnvironmentConfigurator GetEnvironmentConfigurator()
+        {
+            return this.ApplicationContainer.Resolve<INancyEnvironmentConfigurator>();
+        }
+
+        /// <summary>
+        /// Registers an <see cref="INancyEnvironment"/> instance in the container.
+        /// </summary>
+        /// <param name="container">The container to register into.</param>
+        /// <param name="environment">The <see cref="INancyEnvironment"/> instance to register.</param>
+        protected override void RegisterNancyEnvironment(ILifetimeScope container, INancyEnvironment environment)
+        {
+            container.Update(builder => builder.RegisterInstance(environment));
         }
 
         /// <summary>

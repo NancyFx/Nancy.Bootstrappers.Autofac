@@ -19,8 +19,8 @@
     <tags>Nancy Autofac</tags>
   </metadata>
   <files>
-    <file src="build\binaries\Nancy.Bootstrappers.Autofac.dll" target="lib\net40" />
-    <file src="build\binaries\Nancy.Bootstrappers.Autofac.pdb" target="lib\net40" />
+    <file src="build\binaries\Nancy.Bootstrappers.Autofac.dll" target="lib\net45" />
+    <file src="build\binaries\Nancy.Bootstrappers.Autofac.pdb" target="lib\net45" />
     <file src="src\Nancy.Bootstrappers.Autofac\**\*.cs" target="src" />
   </files>
 </package>
