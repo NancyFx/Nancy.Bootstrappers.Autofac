@@ -2,8 +2,10 @@ namespace Nancy.Bootstrappers.Autofac
 {
     using System;
     using System.Collections.Generic;
-    using Autofac;
-    using Autofac.Core.Lifetime;
+    
+    using global::Autofac;
+    using global::Autofac.Core.Lifetime;
+    
     using Configuration;
     using Diagnostics;
     using Bootstrapper;
