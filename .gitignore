@@ -6,8 +6,8 @@
 *.user
 *.orig
 *.pidb
+*.ide
 *.userprefs
-*.tss
 AssemblyInfo.cs
 .DS_Store
 deploy/
@@ -16,4 +16,15 @@ build/
 [Dd]ebug/
 [Oo]bj/
 [Rr]elease/
-_[Rr]e[Ss]harper.*/
+_[Rr]e[Ss]harper*/
+*.docstates
+*.tss
+*.ncrunchproject
+*.ncrunchsolution
+*.dotCover
+src/_NCrunch_Nancy/
+Thumbs.db
+.idea
+*.GhostDoc.xml
+Gemfile.lock
+.vs/
