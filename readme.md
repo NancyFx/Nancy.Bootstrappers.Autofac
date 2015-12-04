@@ -9,7 +9,7 @@ The easiest way to get the latest version of `AutofacNancyBootstrapper` into you
 ```
 public class Bootstrapper : AutofacNancyBootstrapper
 {
-    protected override void ConfigureApplicationContainer(ILifetimeScope existingContainer)
+    protected override void ConfigureApplicationContainer(ILifetimeScope container)
     {
         container.Update(builder => builder.RegisterType<SmtpService>().As<ISmtpService>().SingleInstance());        
     }
