@@ -6,7 +6,11 @@ When Nancy detects that the `AutofacNancyBootstrapper` type is available in the 
 
 The easiest way to get the latest version of `AutofacNancyBootstrapper` into your application is to install the `Nancy.Bootstrappers.Autofac` nuget.
 
-```
+```csharp
+public interface ISmtpService { }
+
+public class SmtpService : ISmtpService { }
+
 public class Bootstrapper : AutofacNancyBootstrapper
 {
     protected override void ConfigureApplicationContainer(ILifetimeScope container)
@@ -20,7 +24,7 @@ public class Bootstrapper : AutofacNancyBootstrapper
 
 By inheriting from `AutofacNancyBootstrapper` you will gain access to the `ILifetimeScope` of the application and request containers and can perform what ever reqistations that your application requires.
 
-```c#
+```csharp
 public class Bootstrapper : AutofacNancyBootstrapper
 {
     protected override void ApplicationStartup(ILifetimeScope container, IPipelines pipelines)
