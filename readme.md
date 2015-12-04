@@ -11,12 +11,7 @@ public class Bootstrapper : AutofacNancyBootstrapper
 {
     protected override void ConfigureApplicationContainer(ILifetimeScope existingContainer)
     {
-        var builder = new ContainerBuilder();
-        builder.RegisterType<User>()
-               .As<IUser>()
-               .SingleInstance();
-
-        builder.Update(existingContainer.ComponentRegistry);          
+        container.Update(builder => builder.RegisterType<SmtpService>().As<ISmtpService>().SingleInstance());        
     }
 }
 ```
