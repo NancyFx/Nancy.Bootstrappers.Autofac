@@ -1,5 +1,6 @@
 namespace Nancy.Bootstrappers.Autofac.Tests
 {
+    using System;
     using Autofac;
     using Bootstrapper;
     using Nancy.Tests.Fakes;
@@ -9,18 +10,19 @@ namespace Nancy.Bootstrappers.Autofac.Tests
     {
         public bool RequestContainerConfigured { get; set; }
         public bool ApplicationContainerConfigured { get; set; }
-        private readonly NancyInternalConfiguration configuration;
+
+        private readonly Func<ITypeCatalog, NancyInternalConfiguration> configuration;
 
         public FakeAutofacNancyBootstrapper()
         {
         }
 
-        public FakeAutofacNancyBootstrapper(NancyInternalConfiguration configuration)
+        public FakeAutofacNancyBootstrapper(Func<ITypeCatalog, NancyInternalConfiguration> configuration)
         {
             this.configuration = configuration;
         }
 
-        protected override NancyInternalConfiguration InternalConfiguration
+        protected override Func<ITypeCatalog, NancyInternalConfiguration> InternalConfiguration
         {
             get { return configuration ?? base.InternalConfiguration; }
         }

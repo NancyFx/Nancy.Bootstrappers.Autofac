@@ -51,40 +51,40 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\dependencies\Nancy\src\Nancy.Tests\Fakes\FakeNancyModuleWithBasePath.cs">
+    <Compile Include="..\..\dependencies\Nancy\test\Nancy.Tests\Fakes\FakeNancyModuleWithBasePath.cs">
       <Link>FakeNancyModuleWithBasePath.cs</Link>
     </Compile>
-    <Compile Include="..\..\dependencies\Nancy\src\Nancy.Tests\Fakes\FakeNancyModuleWithDependency.cs">
+    <Compile Include="..\..\dependencies\Nancy\test\Nancy.Tests\Fakes\FakeNancyModuleWithDependency.cs">
       <Link>FakeNancyModuleWithDependency.cs</Link>
     </Compile>
-    <Compile Include="..\..\dependencies\Nancy\src\Nancy.Tests\ShouldExtensions.cs">
+    <Compile Include="..\..\dependencies\Nancy\test\Nancy.Tests\ShouldExtensions.cs">
       <Link>ShouldExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\..\dependencies\Nancy\src\Nancy.Tests\Unit\Bootstrapper\Base\BootstrapperBaseFixtureBase.cs">
+    <Compile Include="..\..\dependencies\Nancy\test\Nancy.Tests\Unit\Bootstrapper\Base\BootstrapperBaseFixtureBase.cs">
       <Link>BootstrapperBaseFixtureBase.cs</Link>
-    </Compile>
-    <Compile Include="..\..\dependencies\Nancy\src\SharedAssemblyInfo.cs">
-      <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="AutofacNancyBootstrapperFixture.cs" />
     <Compile Include="AutofacBootstrapperBaseFixture.cs" />
     <Compile Include="FakeAutofacNancyBootstrapper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\dependencies\Nancy\src\Nancy.MSBuild\Nancy.csproj">
+      <Project>{34576216-0dca-4b0f-a0dc-9075e75a676f}</Project>
+      <Name>Nancy</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Nancy.Bootstrappers.Autofac\Nancy.Bootstrappers.Autofac.csproj">
       <Project>{0057E8A4-A349-4C09-98BF-DED6320919FA}</Project>
       <Name>Nancy.Bootstrappers.Autofac</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\dependencies\Nancy\src\Nancy\Nancy.csproj">
-      <Project>{34576216-0DCA-4B0F-A0DC-9075E75A676F}</Project>
-      <Name>Nancy</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
