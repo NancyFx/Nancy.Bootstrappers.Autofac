@@ -7,13 +7,13 @@ require 'rexml/document'
 NANCY_VERSION = ""
 OUTPUT = "build"
 CONFIGURATION = 'Release'
-SHARED_ASSEMBLY_INFO = 'dependencies/Nancy/src/SharedAssemblyInfo.cs'
+SHARED_ASSEMBLY_INFO = 'dependencies/Nancy/SharedAssemblyInfo.cs'
 SOLUTION_FILE = 'src/Nancy.Bootstrappers.Autofac.sln'
 
 Albacore.configure do |config|
     config.log_level = :verbose
     config.msbuild.use :net4
-	config.xunit.command = "dependencies/Nancy/tools/xunit/xunit.console.clr4.x86.exe"
+	config.xunit.command = "dependencies/Nancy/tools/xunit/xunit.console.x86.exe"
 end
 
 desc "Compiles solution and runs unit tests"
