@@ -72,7 +72,7 @@
       <Project>{34576216-0dca-4b0f-a0dc-9075e75a676f}</Project>
       <Name>Nancy</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Nancy.Bootstrappers.Autofac\Nancy.Bootstrappers.Autofac.csproj">
+    <ProjectReference Include="..\..\src\Nancy.Bootstrappers.Autofac\Nancy.Bootstrappers.Autofac.csproj">
       <Project>{0057E8A4-A349-4C09-98BF-DED6320919FA}</Project>
       <Name>Nancy.Bootstrappers.Autofac</Name>
     </ProjectReference>
