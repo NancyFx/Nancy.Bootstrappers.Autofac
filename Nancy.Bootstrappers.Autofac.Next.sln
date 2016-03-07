@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{157294BD-5A2A-4BB9-BFB7-2598E61307E5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{4D21F440-CC56-4D9F-9395-6652A8E5A81C}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+		NuGet.config = NuGet.config
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{0F27EACB-1EC5-4B77-BA0B-E067B75E4D63}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nancy.Bootstrappers.Autofac", "src\Nancy.Bootstrappers.Autofac\Nancy.Bootstrappers.Autofac.xproj", "{4361E5B2-CFD8-471A-BB22-1FA83F2BE43D}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nancy", "dependencies\Nancy\src\Nancy\Nancy.xproj", "{87C7C329-1824-4AC7-AF25-3D06068A01F6}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Nancy.BootStrappers.Autofac.Tests", "test\Nancy.BootStrappers.Autofac.Tests\Nancy.BootStrappers.Autofac.Tests.xproj", "{F1938D4D-B858-4225-AA87-A53D2FF37721}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4361E5B2-CFD8-471A-BB22-1FA83F2BE43D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4361E5B2-CFD8-471A-BB22-1FA83F2BE43D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4361E5B2-CFD8-471A-BB22-1FA83F2BE43D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4361E5B2-CFD8-471A-BB22-1FA83F2BE43D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87C7C329-1824-4AC7-AF25-3D06068A01F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87C7C329-1824-4AC7-AF25-3D06068A01F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87C7C329-1824-4AC7-AF25-3D06068A01F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87C7C329-1824-4AC7-AF25-3D06068A01F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1938D4D-B858-4225-AA87-A53D2FF37721}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1938D4D-B858-4225-AA87-A53D2FF37721}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1938D4D-B858-4225-AA87-A53D2FF37721}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1938D4D-B858-4225-AA87-A53D2FF37721}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4361E5B2-CFD8-471A-BB22-1FA83F2BE43D} = {157294BD-5A2A-4BB9-BFB7-2598E61307E5}
+		{87C7C329-1824-4AC7-AF25-3D06068A01F6} = {157294BD-5A2A-4BB9-BFB7-2598E61307E5}
+		{F1938D4D-B858-4225-AA87-A53D2FF37721} = {0F27EACB-1EC5-4B77-BA0B-E067B75E4D63}
+	EndGlobalSection
+EndGlobal

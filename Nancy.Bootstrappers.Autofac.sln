@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nancy.Bootstrappers.Autofac", "Nancy.Bootstrappers.Autofac\Nancy.Bootstrappers.Autofac.csproj", "{0057E8A4-A349-4C09-98BF-DED6320919FA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nancy.Bootstrappers.Autofac", "src\Nancy.Bootstrappers.Autofac.MSBuild\Nancy.Bootstrappers.Autofac.csproj", "{0057E8A4-A349-4C09-98BF-DED6320919FA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nancy.Bootstrappers.Autofac.Tests", "Nancy.BootStrappers.Autofac.Tests\Nancy.Bootstrappers.Autofac.Tests.csproj", "{F7487A32-729C-4F50-A15C-68D2B57803EA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nancy.Bootstrappers.Autofac.Tests", "test\Nancy.BootStrappers.Autofac.Tests.MSBuild\Nancy.Bootstrappers.Autofac.Tests.csproj", "{F7487A32-729C-4F50-A15C-68D2B57803EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nancy", "..\dependencies\Nancy\src\Nancy.MSBuild\Nancy.csproj", "{34576216-0DCA-4B0F-A0DC-9075E75A676F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nancy", "dependencies\Nancy\src\Nancy.MSBuild\Nancy.csproj", "{34576216-0DCA-4B0F-A0DC-9075E75A676F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F430379B-899C-4FB9-8F5E-C14A4175E11C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{CB4D2D32-E710-49DA-BA9E-3EA3AB0AF5B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,5 +48,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0057E8A4-A349-4C09-98BF-DED6320919FA} = {F430379B-899C-4FB9-8F5E-C14A4175E11C}
+		{F7487A32-729C-4F50-A15C-68D2B57803EA} = {CB4D2D32-E710-49DA-BA9E-3EA3AB0AF5B2}
+		{34576216-0DCA-4B0F-A0DC-9075E75A676F} = {F430379B-899C-4FB9-8F5E-C14A4175E11C}
 	EndGlobalSection
 EndGlobal
