@@ -17,7 +17,7 @@ Albacore.configure do |config|
 end
 
 desc "Compiles solution and runs unit tests"
-task :default => [:clean, :version, :compile, :xunit, :publish, :package]
+task :default => [:clean, :version, :nuget_restore, :compile, :xunit, :publish, :package]
 
 #Add the folders that should be cleaned as part of the clean task
 CLEAN.include(OUTPUT)
@@ -42,6 +42,12 @@ msbuild :compile => [:version] do |msb|
     msb.properties :configuration => CONFIGURATION
     msb.targets :Clean, :Build
     msb.solution = SOLUTION_FILE
+end
+
+desc "Restore NuGet packages"
+exec :nuget_restore do |cmd|
+  cmd.command = "dependencies/Nancy/tools/nuget/NuGet.exe"
+  cmd.parameters = ["restore #{SOLUTION_FILE}"]
 end
 
 desc "Gathers output files and copies them to the output folder"
