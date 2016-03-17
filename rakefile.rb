@@ -17,7 +17,7 @@ Albacore.configure do |config|
 end
 
 desc "Compiles solution and runs unit tests"
-task :default => [:clean, :version, :nuget_restore, :compile, :xunit, :publish, :package]
+task :default => [:clean, :version, :compile, :xunit, :publish, :package]
 
 #Add the folders that should be cleaned as part of the clean task
 CLEAN.include(OUTPUT)
@@ -38,7 +38,7 @@ assemblyinfo :version => [:clean] do |asm|
 end
 
 desc "Compile solution file"
-msbuild :compile => [:version] do |msb|
+msbuild :compile => [:nuget_restore, :version] do |msb|
     msb.properties :configuration => CONFIGURATION
     msb.targets :Clean, :Build
     msb.solution = SOLUTION_FILE
