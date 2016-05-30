@@ -1,0 +1,29 @@
+﻿{
+    "buildOptions": {
+        "compile": [
+            "../../dependencies/Nancy/test/Nancy.Tests/ShouldExtensions.cs",
+            "../../dependencies/Nancy/test/Nancy.Tests/Unit/Bootstrapper/Base/BootstrapperBaseFixtureBase.cs",
+            "../../dependencies/Nancy/test/Nancy.Tests/Fakes/FakeNancyModuleWithBasePath.cs",
+            "../../dependencies/Nancy/test/Nancy.Tests/Fakes/FakeNancyModuleWithDependency.cs"
+        ]
+    },
+
+    "dependencies": {
+        "Autofac": "3.5.2",
+        "dotnet-test-xunit": "1.0.0-rc3-build10019",
+        "Microsoft.NETCore.Platforms": "1.0.1-rc2-24027",
+        "Nancy": { "target": "project" },
+        "Nancy.Bootstrappers.Autofac": { "target": "project" },
+        "xunit": "2.1.0"
+    },
+
+    "frameworks": {
+        "net452": {
+            "frameworkAssemblies": {
+                "System.Runtime": { "type": "build" }
+            }
+        }
+    },
+
+    "testRunner": "xunit"
+}

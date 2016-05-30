@@ -1,15 +1,13 @@
 ﻿{
     "version": "2.0.0-*",
-
     "description": "An Autofac bootstrapper for the Nancy web framework.",
     "authors": [ "Andreas Håkansson, Steven Robbins and contributors" ],
-    "tags": [ "Nancy", "Autofac" ],
-    "projectUrl": "http://nancyfx.org",
-    "licenseUrl": "https://github.com/NancyFx/Nancy/blob/master/license.txt",
-    "iconUrl": "http://nancyfx.org/nancy-nuget.png",
 
-    "compilationOptions": {
-        "define": [ "DNX" ]
+    "packOptions": {
+        "tags": [ "Nancy", "Autofac" ],
+        "projectUrl": "http://nancyfx.org",
+        "licenseUrl": "https://github.com/NancyFx/Nancy/blob/master/license.txt",
+        "iconUrl": "http://nancyfx.org/nancy-nuget.png"
     },
 
     "dependencies": {
@@ -18,6 +16,6 @@
     },
 
     "frameworks": {
-        "net451": { }
+        "net452": { }
     }
 }
