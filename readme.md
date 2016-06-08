@@ -22,7 +22,7 @@ public class Bootstrapper : AutofacNancyBootstrapper
 
 ### Customizing
 
-By inheriting from `AutofacNancyBootstrapper` you will gain access to the `ILifetimeScope` of the application and request containers and can perform what ever reqistations that your application requires.
+By inheriting from `AutofacNancyBootstrapper` you will gain access to the `ILifetimeScope` of the application and request containers and can perform what ever registrations that your application requires.
 
 ```csharp
 public class Bootstrapper : AutofacNancyBootstrapper
