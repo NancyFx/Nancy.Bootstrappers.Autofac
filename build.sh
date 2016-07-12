@@ -7,7 +7,7 @@ SHOW_VERSION=false
 
 SCRIPT_NAME="build.cake"
 TOOL_PATH="dependencies/Nancy/tools"
-NUGET_PATH="$TOOL_PATH/nuget/NuGet.exe"
+NUGET_PATH="nuget/NuGet.exe"
 CAKE_VERSION="0.13.0"
 CAKE_PATH="$TOOL_PATH/Cake.$CAKE_VERSION/Cake.exe"
 
