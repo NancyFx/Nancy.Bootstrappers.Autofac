@@ -11,11 +11,12 @@
     },
 
     "dependencies": {
-        "Autofac": "3.5.2",
+        "Autofac": "4.0.0-rc3-309",
         "Nancy": { "target": "project" }
     },
 
     "frameworks": {
-        "net452": { }
+        "netstandard1.6" : {},
+        "net452": {}
     }
 }
