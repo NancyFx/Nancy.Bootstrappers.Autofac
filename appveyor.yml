@@ -25,7 +25,7 @@ deploy:
 - provider: NuGet
   server: https://www.myget.org/F/nancyfx/api/v2/package
   api_key:
-    secure: sQd0wpfElb6z4Qmb+xMqltRVOhDy7e/0Prk0iw9xWFPXBeCiczooFzADiGN2+74K
+    secure: oKo0N/ErpLQFB+2HQl4CjgjmTkhvimjTfrLo8G4KOCOzjuIr9LAniNLg8HtpmL0G
   skip_symbols: true
   on:
     branch: master
