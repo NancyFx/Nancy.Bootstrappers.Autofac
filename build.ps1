@@ -1,13 +1,34 @@
-[CmdletBinding()]
-Param(
-    [string]$Target = "Default",
-    [ValidateSet("Quiet", "Minimal", "Normal", "Verbose", "Diagnostic")]
-    [string]$Verbosity = "Verbose",
-    [switch]$WhatIf,
-    [string]$NuGetSource = $null,
-    [string]$NuGetApiKey = $null
-)
+# Define constants.
+$PSScriptRoot = split-path -parent $MyInvocation.MyCommand.Definition;
+$Script = Join-Path $PSScriptRoot "build.cake"
+$ToolPath = Join-Path $PSScriptRoot "dependencies/Nancy/tools"
+$NuGetPath = Join-Path $ToolPath "nuget/NuGet.exe"
+$CakeVersion = "0.13.0"
+$CakePath = Join-Path $ToolPath "Cake.$CakeVersion/Cake.exe"
+$Target = "Default"
+$Verbosity = "Verbose"
+$DryRun
+$Arguments = @{}
 
+for($i=0; $i -lt $args.length; $i+=2)
+{
+  if ($args[$i].ToLower() -eq "-target")
+  {
+    $Target = $args[$i+1]
+  }
+  ElseIf ($args[$i].ToLower() -eq "-verbosity")
+  {
+    $Verbosity = $args[$i+1]
+  }
+  ElseIf ($args[$i].ToLower() -eq "-dryrun")
+  {
+    $DryRun = "-dryrun"
+  }
+  Else
+  {
+    $Arguments.Add($args[$i], $args[$i+1])
+  }
+}
 ######################################################################################################
 
 Function Install-Dotnet()
@@ -65,14 +86,6 @@ Function Remove-PathVariable([string]$VariableToRemove)
 
 Write-Host "Preparing to run build script..."
 
-# Define constants.
-$PSScriptRoot = split-path -parent $MyInvocation.MyCommand.Definition;
-$Script = Join-Path $PSScriptRoot "build.cake"
-$ToolPath = Join-Path $PSScriptRoot "dependencies/Nancy/tools"
-$NuGetPath = Join-Path $ToolPath "nuget/NuGet.exe"
-$CakeVersion = "0.13.0"
-$CakePath = Join-Path $ToolPath "Cake.$CakeVersion/Cake.exe"
-
 # Install Dotnet CLI.
 Install-Dotnet
 
@@ -85,19 +98,11 @@ if (!(Test-Path $CakePath)) {
     }
 }
 
-# Is this a dry run?
-$UseDryRun = "";
-if($WhatIf.IsPresent) {
-    $UseDryRun = "-dryrun"
-}
-
 # Build the argument list.
-$Arguments = @{
-    source=$NuGetSource;
-    apikey=$NuGetApiKey;
-}.GetEnumerator() | %{"--{0}=`"{1}`"" -f $_.key, $_.value };
+$Arguments = $Arguments.GetEnumerator() | %{"{0}=`"{1}`"" -f $_.key, $_.value };
 
 # Start Cake.
 Write-Host "Running build script..."
+Write-Host "`"$CakePath`" `"$Script`" -target=`"$Target`" -verbosity=`"$Verbosity`" $UseDryRun $Arguments"
 Invoke-Expression "& `"$CakePath`" `"$Script`" -target=`"$Target`" -verbosity=`"$Verbosity`" $UseDryRun $Arguments"
 exit $LASTEXITCODE

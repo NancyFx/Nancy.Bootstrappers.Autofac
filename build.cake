@@ -7,7 +7,7 @@ using System.Xml.XPath;
 var target = Argument<string>("target", "Default");
 var source = Argument<string>("source", null);
 var apiKey = Argument<string>("apikey", null);
-var version = GetNancyVersion(new FilePath("dependencies/Nancy/src/Nancy/project.json"));
+var version = target.ToLower() == "default" ? "2.0.0-Pre" + (EnvironmentVariable("APPVEYOR_BUILD_NUMBER") ?? "0") : GetNancyVersion(new FilePath("dependencies/Nancy/src/Nancy/project.json"));
 
 // Variables
 var configuration = IsRunningOnWindows() ? "Release" : "MonoRelease";
@@ -41,6 +41,7 @@ Task("Update-Version")
   .Description("Update version")
   .Does(() =>
 {
+  Information("Setting version to " + version);
   if(string.IsNullOrWhiteSpace(version)) {
     throw new CakeException("No version specified!");
   }
@@ -216,7 +217,7 @@ public string GetNancyVersion(FilePath filePath)
 
 Task("Default")
   .IsDependentOn("Test")
-  .IsDependentOn("Package");
+  .IsDependentOn("Package-NuGet");
 
 Task("Mono")
   .IsDependentOn("Test");
