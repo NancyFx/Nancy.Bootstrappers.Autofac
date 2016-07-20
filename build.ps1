@@ -10,15 +10,17 @@ $Verbosity = "Verbose"
 $DryRun
 $Arguments = @{}
 
-for($i=0; $i -lt $args.length; $i+=2)
+for($i=0; $i -lt $args.length; $i+=1)
 {
   if ($args[$i].ToLower() -eq "-target")
   {
     $Target = $args[$i+1]
+    $i+=1
   }
   ElseIf ($args[$i].ToLower() -eq "-verbosity")
   {
     $Verbosity = $args[$i+1]
+    $i+=1
   }
   ElseIf ($args[$i].ToLower() -eq "-dryrun")
   {
@@ -27,6 +29,7 @@ for($i=0; $i -lt $args.length; $i+=2)
   Else
   {
     $Arguments.Add($args[$i], $args[$i+1])
+    $i+=1
   }
 }
 ######################################################################################################
@@ -103,6 +106,6 @@ $Arguments = $Arguments.GetEnumerator() | %{"{0}=`"{1}`"" -f $_.key, $_.value };
 
 # Start Cake.
 Write-Host "Running build script..."
-Write-Host "`"$CakePath`" `"$Script`" -target=`"$Target`" -verbosity=`"$Verbosity`" $Arguments"
-Invoke-Expression "& `"$CakePath`" `"$Script`" -target=`"$Target`" -verbosity=`"$Verbosity`" $Arguments"
+Write-Host "`"$CakePath`" `"$Script`" -target=`"$Target`" -verbosity=`"$Verbosity`" $DryRun $Arguments"
+Invoke-Expression "& `"$CakePath`" `"$Script`" -target=`"$Target`" -verbosity=`"$Verbosity`" $DryRun $Arguments"
 exit $LASTEXITCODE
