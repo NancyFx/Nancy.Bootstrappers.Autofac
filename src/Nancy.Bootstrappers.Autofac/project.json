@@ -11,7 +11,7 @@
     },
 
     "dependencies": {
-        "Autofac": "4.0.0-rc3-309",
+        "Autofac": "4.0.0-rc3-316",
         "Nancy": { "target": "project" }
     },
 

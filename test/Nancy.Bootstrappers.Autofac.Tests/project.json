@@ -9,7 +9,7 @@
     },
 
     "dependencies": {
-        "Autofac": "4.0.0-rc3-309",
+        "Autofac": "4.0.0-rc3-316",
         "dotnet-test-xunit": "2.2.0-preview2-build1029",
         "Microsoft.NETCore.Platforms": "1.0.1",
         "Nancy": { "target": "project" },
