@@ -16,7 +16,7 @@ var configuration = IsRunningOnWindows() ? "Release" : "MonoRelease";
 var output = Directory("build");
 var outputBinaries = output + Directory("binaries");
 var outputBinariesNet452 = outputBinaries + Directory("net452");
-var outputBinariesNetstandard = outputBinaries + Directory("netstandard1.5");
+var outputBinariesNetstandard = outputBinaries + Directory("netstandard1.6");
 var outputPackages = output + Directory("packages");
 var outputNuGet = output + Directory("nuget");
 var xunit = "test/Nancy.Bootstrappers.Autofac.Tests/bin/"+configuration+"/net452/unix-x64/dotnet-test-xunit.exe";
@@ -53,7 +53,7 @@ Task("Update-Version")
 
   System.IO.File.WriteAllText(file.FullPath, project, Encoding.UTF8);
 });
-      
+
 
 Task("Restore-NuGet-Packages")
   .Description("Restores NuGet packages")
@@ -111,18 +111,18 @@ Task("Test")
       });
     }
   }
-  else 
+  else
   {
-    // For when test projects are set to run against netstandard1.5 
+    // For when test projects are set to run against netstandard
 
     // DotNetCoreTest(project.GetDirectory().FullPath, new DotNetCoreTestSettings {
     //   Configuration = configuration,
-    //   Framework = "netstandard1.5",
+    //   Framework = "netstandard1.6",
     //   Runtime = "unix-64"
     // });
 
-    using(var process = StartAndReturnProcess("mono", new ProcessSettings{Arguments = 
-      xunit + " " + 
+    using(var process = StartAndReturnProcess("mono", new ProcessSettings{Arguments =
+      xunit + " " +
       "test/Nancy.Bootstrappers.Autofac.Tests/bin/"+configuration+"/net452/unix-x64/Nancy.Bootstrappers.Autofac.Tests.dll"}))
     {
       process.WaitForExit();
@@ -145,10 +145,10 @@ Task("Publish")
     + GetFiles("src/**/bin/" + configuration + "/net452/*.pdb")
     + GetFiles("src/**/*.ps1"), outputBinariesNet452);
 
-  // Copy netstandard1.5 binaries.
-  CopyFiles(GetFiles("src/**/bin/" + configuration + "/netstandard1.5/*.dll")
-    + GetFiles("src/**/bin/" + configuration + "/netstandard1.5/*.xml")
-    + GetFiles("src/**/bin/" + configuration + "/netstandard1.5/*.pdb")
+  // Copy netstandard binaries.
+  CopyFiles(GetFiles("src/**/bin/" + configuration + "/netstandard1.6/*.dll")
+    + GetFiles("src/**/bin/" + configuration + "/netstandard1.6/*.xml")
+    + GetFiles("src/**/bin/" + configuration + "/netstandard1.6/*.pdb")
     + GetFiles("src/**/*.ps1"), outputBinariesNetstandard);
 
 });
