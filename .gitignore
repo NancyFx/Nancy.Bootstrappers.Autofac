@@ -30,4 +30,5 @@ Gemfile.lock
 .vs/
 packages/
 project.lock.json
-TestAssembly.dll 
+TestAssembly.dll
+tools/
