@@ -1,0 +1,1 @@
+./dependencies/Nancy/build.sh "$@"
