@@ -51,6 +51,12 @@ public class Bootstrapper : AutofacNancyBootstrapper
 }
 ```
 
+Using container builder for registrations is simple.
+
+```c#
+container.Update(builder => builder.RegisterType<MyImplementation>().As<MyInterface>());
+```
+
 You can also override the `GetApplicationContainer` method and return a pre-existing container instance, instead of having Nancy create one for you. This is useful if Nancy is co-existing with another application and you want them to share a single container.
 
 ```c#
