@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Authors>Andreas Håkansson, Steven Robbins and contributors</Authors>
+    <CodeAnalysisRuleSet>..\..\dependencies\Nancy\Nancy.ruleset</CodeAnalysisRuleSet>
+    <Description>An Autofac bootstrapper for the Nancy web framework.</Description>
+    <DisableImplicitFrameworkReferences Condition=" '$(TargetFramework)' == 'net452' ">true</DisableImplicitFrameworkReferences>
+    <PackageIconUrl>http://nancyfx.org/nancy-nuget.png</PackageIconUrl>
+    <PackageLicenseUrl>https://github.com/NancyFx/Nancy/blob/master/license.txt</PackageLicenseUrl>
+    <PackageProjectUrl>http://nancyfx.org</PackageProjectUrl>
+    <PackageTags>Nancy;Autofac</PackageTags>
+    <TargetFrameworks>netstandard1.6;net452</TargetFrameworks>
+    <Version>2.0.0-clinteastwood</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../../dependencies/Nancy/src/Nancy/Nancy.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.0.0-rc3-316" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+  </ItemGroup>
+
+</Project>
